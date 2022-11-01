@@ -16,10 +16,10 @@ class CreateListsTable extends Migration
     Schema::create('lists', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->string('subtitle');
-      $table->string('background');
-      $table->string('thumbnail');
-      $table->text('description');
+      $table->string('subtitle')->nullable();
+      $table->string('background')->default('#ececec')->nullable();
+      $table->string('thumbnail')->nullable();
+      $table->text('description')->nullable();
       $table->foreignId('user_id')->references('id')->on('users');
       $table->timestamps();
     });

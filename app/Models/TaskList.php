@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskList extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $table = 'lists';
+  protected $fillable = [
+    'name', 'subtitle', 'background', 'thumbnail', 'description', 'user_id'
+  ];
 }
