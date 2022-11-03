@@ -5,7 +5,6 @@ import Logout from "../components/auth/Logout";
 
 function Header(props) {
   const {currentUser} = useSelector((state) => state.user);
-  console.log(currentUser);
   return (
       <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div className="container">

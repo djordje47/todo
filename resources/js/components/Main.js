@@ -13,8 +13,9 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import Logout from "./auth/Logout";
 
 function Main() {
-  const {user} = useSelector(state => state);
-  console.log(user);
+  const {currentUser} = useSelector(state => state.user);
+  console.log(currentUser)
+  console.log(!!currentUser)
   return (
       <Router>
         <Header/>
@@ -24,7 +25,7 @@ function Main() {
           <Route exact path="/register" element={<Register/>}/>
           <Route exact path="/logout" element={<Logout/>}/>
           <Route exact path="/list" element={
-            <ProtectedRoute isAllowed={!!user} redirectPath={'/login'}>
+            <ProtectedRoute isAllowed={!!currentUser} redirectPath={'/login'}>
               <List/>
             </ProtectedRoute>
           }/>

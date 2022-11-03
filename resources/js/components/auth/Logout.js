@@ -10,7 +10,6 @@ function Logout(props) {
     e.preventDefault();
     axios.post('/api/logout')
     .then((res) => {
-      console.log(res.data)
       dispatch(unsetAuthenticatedUser());
       navigate('/');
     })

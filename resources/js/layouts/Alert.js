@@ -12,7 +12,9 @@ function Alert() {
   return (
       <div>
         {alerts.map((singleAlert, index) => (
-            <div className={`alert alert-${singleAlert.type ?? 'info'} alert-dismissible fade show m-2`} role="alert">
+            <div key={index}
+                 className={`alert alert-${singleAlert.type ?? 'info'} alert-dismissible fade show m-2`}
+                 role="alert">
               {singleAlert.title && <h3>{singleAlert.title}</h3>}
               <p>{singleAlert.message}</p>
               <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"

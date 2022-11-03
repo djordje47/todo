@@ -10,11 +10,12 @@ class TaskListController extends Controller
   /**
    * Display a listing of the resource.
    *
-   * @return \Illuminate\Http\Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function index()
+  public function index($userId)
   {
-    //
+    $lists = TaskList::where('user_id', $userId)->paginate(5);
+    return response()->json($lists);
   }
 
   /**

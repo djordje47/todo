@@ -61,4 +61,15 @@ class TaskController extends Controller
   {
     //
   }
+
+  public function listTasks(int $listId)
+  {
+    $userId = auth()->user()->id;
+    $tasks = Task::where([
+      'list_id' => $listId,
+      'user_id' => $userId
+    ])->paginate(100);
+
+    return response()->json($tasks);
+  }
 }
