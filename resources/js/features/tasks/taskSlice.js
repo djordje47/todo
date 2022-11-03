@@ -9,7 +9,7 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     setTasks: (state, {payload}) => {
-      state.tasks = [...state.tasks, payload];
+      state.tasks = payload;
     }
     // removeAlert: (state, {payload}) => {
     //   state.alerts = state.alerts.filter((alert, index) => (index !== payload))

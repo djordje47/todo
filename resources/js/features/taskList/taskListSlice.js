@@ -12,7 +12,6 @@ export const taskListSlice = createSlice({
       state.taskLists = payload;
     },
     setActiveTaskList: (state, {payload}) => {
-      console.log(payload)
       state.activeTaskList = payload;
     }
   }

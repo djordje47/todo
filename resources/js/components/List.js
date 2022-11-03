@@ -13,20 +13,18 @@ function List(props) {
   useEffect(() => {
     if (currentUser) {
       axios.get(`/api/lists/${currentUser.id}`).then(res => {
-        if (res.data.total > 0) {
+        if (res.data.data.length > 0) {
+          dispatch(setActiveTaskList(res.data.data[0]));
           dispatch(setTaskLists(res.data));
-          dispatch(setActiveTaskList(res.data[0]));
+          axios.get(`/api/list-tasks/${res.data.data[0].id}`)
+          .then(res => {
+            console.log(res.data)
+            dispatch(setTasks(res.data));
+          }).catch(err => console.log(err))
         }
       }).catch(err => console.log(err));
     }
-    if (activeTaskList) {
-      axios.get(`/api/list-tasks/${activeTaskList.id}`)
-      .then(res => {
-        dispatch(setTasks(res.data));
-      })
-      .catch(err => console.log(err))
-    }
-  }, [])
+  }, []);
   return (
       <div className="container">
         <div className="row m-4">
@@ -44,7 +42,7 @@ function List(props) {
           <div className="col-9 border-1">
             <h4>{currentUser && `${currentUser.name}'s tasks`}</h4>
             <hr/>
-            <ul className="list-group-flush">
+            <ul className="list-group">
               {tasks.data && tasks.data.map((singleTask, index) => (
                   <li className="list-group-item" key={singleTask.id}>{singleTask.title}</li>
               ))}
