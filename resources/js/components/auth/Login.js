@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {setAuthenticatedUser} from "../../features/user/userSlice";
 import {useNavigate} from "react-router-dom";
+import {setAlert} from "../../features/layouts/alertSlice";
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ function Login(props) {
     });
     dispatch(setAuthenticatedUser(user.data));
     if (user) {
+      dispatch(setAlert({title: "Success!", message: 'You are logged in!', type: 'success'}));
       navigate("/list");
     }
   }
@@ -27,7 +29,6 @@ function Login(props) {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-6">
-            {user.currentUser && <p>Hello & welcome {user.currentUser.name}</p>}
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
