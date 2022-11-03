@@ -2,7 +2,7 @@ import React from 'react';
 
 function List(props) {
   return (
-      <div>List</div>
+      <React.Fragment>List</React.Fragment>
   );
 }
 

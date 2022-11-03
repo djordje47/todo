@@ -6,11 +6,15 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
 import Home from "./Home";
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 import {store} from "../store";
 import List from "./List";
+import ProtectedRoute from "./utils/ProtectedRoute";
+import Logout from "./auth/Logout";
 
 function Main() {
+  const {user} = useSelector(state => state);
+  console.log(user);
   return (
       <Router>
         <Header/>
@@ -18,7 +22,12 @@ function Main() {
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/register" element={<Register/>}/>
-          <Route exact path="/list" element={<List/>}/>
+          <Route exact path="/logout" element={<Logout/>}/>
+          <Route exact path="/list" element={
+            <ProtectedRoute isAllowed={!!user} redirectPath={'/login'}>
+              <List/>
+            </ProtectedRoute>
+          }/>
         </Routes>
         <Footer/>
       </Router>
