@@ -7,15 +7,15 @@ import Register from "./auth/Register";
 import Login from "./auth/Login";
 import Home from "./Home";
 import {Provider, useSelector} from "react-redux";
-import {store} from "../store";
+import {persistor, store} from "../store";
 import List from "./List";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Logout from "./auth/Logout";
+import {PersistGate} from "redux-persist/integration/react";
 
 function Main() {
   const {currentUser} = useSelector(state => state.user);
-  console.log(currentUser)
-  console.log(!!currentUser)
+
   return (
       <Router>
         <Header/>
@@ -40,7 +40,9 @@ export default Main;
 if (document.getElementById('app')) {
   ReactDOM.render(
       <Provider store={store}>
-        <Main/>
+        <PersistGate loading={null} persistor={persistor}>
+          <Main/>
+        </PersistGate>
       </Provider>,
       document.getElementById('app')
   );
