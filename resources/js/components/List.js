@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import Alert from "../layouts/Alert";
 import {setActiveTaskList, setTaskLists} from "../features/taskList/taskListSlice";
 import {setTasks} from "../features/tasks/taskSlice";
 
@@ -30,19 +29,20 @@ function List(props) {
         <div className="row m-4">
           <div className="col-3 border-1">
             <h4>{currentUser && `${currentUser.name}'s list`}</h4>
+            <hr/>
             <ul className="list-group">
-              {taskLists.data && taskLists.data.map((singleList, index) => (
+              {taskLists.data ? taskLists.data.map((singleList, index) => (
                   <li className="list-group-item" key={singleList.id}>{singleList.name}</li>
-              ))}
+              )) : <p>You don't have any lists yet!</p>}
             </ul>
           </div>
           <div className="col-9 border-1">
             <h4>{currentUser && `${currentUser.name}'s tasks`}</h4>
             <hr/>
             <ul className="list-group">
-              {tasks.data && tasks.data.map((singleTask, index) => (
+              {tasks.data ? tasks.data.map((singleTask, index) => (
                   <li className="list-group-item" key={singleTask.id}>{singleTask.title}</li>
-              ))}
+              )) : <p>You don't have any tasks yet!</p>}
             </ul>
           </div>
         </div>

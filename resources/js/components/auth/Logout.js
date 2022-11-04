@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {unsetAuthenticatedUser} from "../../features/user/userSlice";
 import {setAlert} from "../../features/layouts/alertSlice";
+import {setTasks} from "../../features/tasks/taskSlice";
+import {setTaskLists} from "../../features/taskList/taskListSlice";
 
 function Logout(props) {
   const navigate = useNavigate();
@@ -13,6 +15,8 @@ function Logout(props) {
     .then((res) => {
       dispatch(unsetAuthenticatedUser());
       dispatch(setAlert(res.data));
+      dispatch(setTasks([]));
+      dispatch(setTaskLists([]));
       navigate('/login');
     })
     .catch((err) => {
