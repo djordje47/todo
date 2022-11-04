@@ -12,13 +12,19 @@ import List from "./List";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Logout from "./auth/Logout";
 import {PersistGate} from "redux-persist/integration/react";
+import Alert from "../layouts/Alert";
 
 function Main() {
   const {currentUser} = useSelector(state => state.user);
-
+  const {alerts} = useSelector(state => state.alert);
   return (
       <Router>
         <Header/>
+        <div className="row justify-content-center align-content-center align-items-center m-4">
+          <div className="col-6">
+            {alerts && <Alert/>}
+          </div>
+        </div>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/login" element={<Login/>}/>

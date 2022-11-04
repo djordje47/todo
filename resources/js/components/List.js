@@ -28,9 +28,6 @@ function List(props) {
   return (
       <div className="container">
         <div className="row m-4">
-          {alerts && <Alert/>}
-        </div>
-        <div className="row m-4">
           <div className="col-3 border-1">
             <h4>{currentUser && `${currentUser.name}'s list`}</h4>
             <ul className="list-group">
