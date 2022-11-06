@@ -8,7 +8,7 @@ import Login from "./auth/Login";
 import Home from "./Home";
 import {Provider, useSelector} from "react-redux";
 import {persistor, store} from "../store";
-import List from "./List";
+import List from "./lists/List";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Logout from "./auth/Logout";
 import {PersistGate} from "redux-persist/integration/react";

@@ -13,6 +13,7 @@ export const userSlice = createSlice({
     },
     unsetAuthenticatedUser: (state) => {
       state.currentUser = null;
+      localStorage.clear();
     }
   }
 });
