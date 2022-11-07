@@ -14,7 +14,7 @@ class TaskListController extends Controller
    */
   public function index($userId)
   {
-    $lists = TaskList::where('user_id', $userId)->paginate(100);
+    $lists = TaskList::where('user_id', $userId)->paginate(10);
     return response()->json($lists);
   }
 
@@ -44,7 +44,7 @@ class TaskListController extends Controller
       'id' => $listId
     ])->first();
     if ($list->tasks->count()) {
-      $tasks = $list->tasks()->where('user_id', $userId)->paginate(5);
+      $tasks = $list->tasks()->where('user_id', $userId)->paginate(10);
     }
     return response(['activeList' => $list, 'tasks' => $tasks], 200);
   }

@@ -92,7 +92,7 @@ class TaskController extends Controller
     $tasks = Task::where([
       'list_id' => $listId,
       'user_id' => $userId
-    ])->paginate(100);
+    ])->paginate(10);
 
     return response()->json($tasks);
   }
