@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class TaskController extends Controller
 {
@@ -21,11 +22,34 @@ class TaskController extends Controller
    * Store a newly created resource in storage.
    *
    * @param \Illuminate\Http\Request $request
-   * @return \Illuminate\Http\Response
+   * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
    */
   public function store(Request $request)
   {
-    //
+    $currentUserId = auth()->user()->id;
+    $listId = $request->get('listId');
+    try {
+      $request->validate([
+        'title' => 'required|string',
+        'subtitle' => 'nullable|string',
+        'notes' => 'nullable|string',
+        'files' => 'nullable',
+      ]);
+
+      $newTask = Task::create([
+        'title' => $request->get('title'),
+        'subtitle' => $request->get('subtitle'),
+        'notes' => $request->get('notes'),
+        'user_id' => $currentUserId,
+        'list_id' => $listId,
+      ]);
+      return $this->listTasks($listId);
+    } catch (\Illuminate\Validation\ValidationException $validationException) {
+      $validationErrors = Arr::flatten($validationException->errors());
+      return response($validationErrors, 403);
+    } catch (\Exception $exception) {
+      return response($exception->getMessage(), 500);
+    }
   }
 
   /**
@@ -68,7 +92,7 @@ class TaskController extends Controller
     $tasks = Task::where([
       'list_id' => $listId,
       'user_id' => $userId
-    ])->paginate(5);
+    ])->paginate(100);
 
     return response()->json($tasks);
   }

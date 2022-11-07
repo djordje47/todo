@@ -14,7 +14,7 @@ class TaskListController extends Controller
    */
   public function index($userId)
   {
-    $lists = TaskList::where('user_id', $userId)->paginate(5);
+    $lists = TaskList::where('user_id', $userId)->paginate(100);
     return response()->json($lists);
   }
 
