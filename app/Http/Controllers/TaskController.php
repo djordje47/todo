@@ -62,13 +62,13 @@ class TaskController extends Controller
     //
   }
 
-  public function listTasks(int $listId)
+  public function listTasks(int $listId): \Illuminate\Http\JsonResponse
   {
     $userId = auth()->user()->id;
     $tasks = Task::where([
       'list_id' => $listId,
       'user_id' => $userId
-    ])->paginate(100);
+    ])->paginate(5);
 
     return response()->json($tasks);
   }

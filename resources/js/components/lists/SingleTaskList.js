@@ -1,4 +1,5 @@
 import React from 'react';
+import AppPagination from "../../layouts/AppPagination";
 
 function SingleTaskList({currentUser, tasks}) {
   return (
@@ -10,6 +11,7 @@ function SingleTaskList({currentUser, tasks}) {
               <li className="list-group-item" key={singleTask.id}>{singleTask.title}</li>
           )) : <p>You don't have any tasks yet!</p>}
         </ul>
+        <AppPagination/>
       </div>
   );
 }

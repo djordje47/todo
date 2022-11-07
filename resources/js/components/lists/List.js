@@ -19,7 +19,6 @@ function List(props) {
           dispatch(setTaskLists(res.data));
           axios.get(`/api/list-tasks/${res.data.data[0].id}?page=1`)
           .then(res => {
-            console.log(res.data)
             dispatch(setTasks(res.data));
           }).catch(err => console.log(err))
         }
@@ -31,7 +30,6 @@ function List(props) {
         <div className="row m-4">
           <SingleList taskLists={taskLists} currentUser={currentUser}/>
           <SingleTaskList tasks={tasks} currentUser={currentUser}/>
-          <AppPagination items={tasks}/>
         </div>
       </div>
   );
