@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     return $request->user();
   });
   Route::get('/lists/{userId}', [\App\Http\Controllers\TaskListController::class, 'index'])->name('users-lists');
+  Route::get('/list/{listId}', [\App\Http\Controllers\TaskListController::class, 'show'])->name('users-list');
   Route::get('/list-tasks/{listId}', [\App\Http\Controllers\TaskController::class, 'listTasks'])->name('list-tasks');
   Route::post('/logout', [LoginController::class, 'logout']);
 });

@@ -35,6 +35,11 @@ function Main() {
               <List/>
             </ProtectedRoute>
           }/>
+          <Route exact path="/list/:listId" element={
+            <ProtectedRoute isAllowed={!!currentUser} redirectPath={'/login'}>
+              <List/>
+            </ProtectedRoute>
+          }/>
         </Routes>
         <Footer/>
       </Router>

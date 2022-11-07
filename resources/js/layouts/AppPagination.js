@@ -15,7 +15,7 @@ function AppPagination() {
   };
   return (
       <div>
-        {tasks && <Pagination
+        {tasks.data && <Pagination
             activePage={tasks.current_page}
             totalItemsCount={tasks.total}
             itemsCountPerPage={tasks.per_page}

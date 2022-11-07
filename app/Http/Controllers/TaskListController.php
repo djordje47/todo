@@ -35,9 +35,18 @@ class TaskListController extends Controller
    * @param \App\Models\TaskList $taskList
    * @return \Illuminate\Http\Response
    */
-  public function show(TaskList $taskList)
+  public function show(int $listId)
   {
-    //
+    $tasks = [];
+    $userId = auth()->user()->id;
+    $list = TaskList::where([
+      'user_id' => $userId,
+      'id' => $listId
+    ])->first();
+    if ($list->tasks->count()) {
+      $tasks = $list->tasks()->where('user_id', $userId)->paginate(5);
+    }
+    return response(['activeList' => $list, 'tasks' => $tasks], 200);
   }
 
   /**
