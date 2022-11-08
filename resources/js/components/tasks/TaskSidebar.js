@@ -1,6 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setTaskNotes, setTaskSubtitle, setTaskTitle, toggleSidebar, updateTask} from "../../features/tasks/taskSlice";
+import {
+  setTaskNotes,
+  setTasks,
+  setTaskSubtitle,
+  setTaskTitle,
+  toggleSidebar,
+  updateTask
+} from "../../features/tasks/taskSlice";
 
 function TaskSidebar() {
   const {selectedTask, isSidebarToggled} = useSelector(state => state.task);
@@ -10,20 +17,20 @@ function TaskSidebar() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateTask(selectedTask));
-    // axios.put('/api/list-tasks/update', {
-    //   id: selectedTask.id,
-    //   title: selectedTask.title,
-    //   subtitle: selectedTask.subtitle,
-    //   notes: selectedTask.notes
-    // }).then(res => {
-    //   console.log(res)
-    //   const {updatedTask, tasks} = res.data;
-    //   // dispatch(setSelectedTask(res.updatedTask));
-    //   // dispatch(setTasks(res.tasks));
-    // }).catch(err => {
-    //   console.log(err)
-    // });
+    axios.put('/api/list-tasks/update', {
+      id: selectedTask.id,
+      title: selectedTask.title,
+      subtitle: selectedTask.subtitle,
+      notes: selectedTask.notes
+    }).then(res => {
+      console.log(res)
+      const {updatedTask, updatedTaskList} = res.data;
+      dispatch(updateTask(updatedTask));
+      dispatch(setTasks(updatedTaskList));
+      // dispatch(setSelectedTask(res.updatedTask));
+    }).catch(err => {
+      console.log(err)
+    });
   }
   return (
       <>

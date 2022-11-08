@@ -70,9 +70,29 @@ class TaskController extends Controller
    * @param \App\Models\Task $task
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Task $task)
+  public function update(Request $request)
   {
-    //
+    try {
+      $request->validate([
+        'title' => 'required|string',
+        'subtitle' => 'nullable|string',
+        'notes' => 'nullable|string',
+        'files' => 'nullable',
+      ]);
+
+      $task = Task::where('id', $request->get('taskId'))->first();
+      $task->title = $request->get('title');
+      $task->subtitle = $request->get('subtitle');
+      $task->notes = $request->get('notes');
+      $taskList = $this->listTasks($task->list_id);
+      return response(['updatedTask' => $task, 'updatedTaskList' => $taskList], 200);
+    } catch (\Illuminate\Validation\ValidationException $validationException) {
+      $validationErrors = Arr::flatten($validationException->errors());
+      return response($validationErrors, 403);
+    } catch (\Exception $exception) {
+      return response($exception->getMessage(), 500);
+    }
+
   }
 
   /**
