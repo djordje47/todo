@@ -7,7 +7,13 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import "./components/taskSidebar";
+
 body, html, #app {
   width: 100%;
   height: 100%;
+}
+
+.single-task:hover {
+  cursor: pointer;
 }

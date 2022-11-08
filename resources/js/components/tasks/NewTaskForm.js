@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {addNewTask, setTasks} from "../../features/tasks/taskSlice";
+import {setTasks} from "../../features/tasks/taskSlice";
 import {setAlert} from "../../features/layouts/alertSlice";
 
 function NewTaskForm(props) {
@@ -20,12 +20,11 @@ function NewTaskForm(props) {
       dispatch(setTasks(data));
     }).catch(err => {
       console.log(err)
-      // if (response.hasOwnProperty('data')) {
-      //   console.log(response.data)
-      //   response.data.forEach(single => {
-      //     dispatch(setAlert({type: 'danger', message: single}))
-      //   });
-      // }
+      if (err.response.hasOwnProperty('data')) {
+        err.response.data.forEach(single => {
+          dispatch(setAlert({type: 'danger', message: single}))
+        });
+      }
     })
   }
   return (

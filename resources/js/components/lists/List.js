@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {setActiveTaskList, setTaskLists} from "../../features/taskList/taskListSlice";
 import SingleList from "./SingleList";
 import SingleTaskList from "./SingleTaskList";
-import NewTaskForm from "../tasks/NewTaskForm";
 
 function List(props) {
   const {currentUser} = useSelector((state) => state.user);

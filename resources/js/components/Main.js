@@ -13,6 +13,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import Logout from "./auth/Logout";
 import {PersistGate} from "redux-persist/integration/react";
 import Alert from "../layouts/Alert";
+import TaskSidebar from "./tasks/TaskSidebar";
 
 function Main() {
   const {currentUser} = useSelector(state => state.user);
@@ -20,6 +21,7 @@ function Main() {
   return (
       <Router>
         <Header/>
+        <TaskSidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'}/>
         <div className="row justify-content-center align-content-center align-items-center m-4">
           <div className="col-6">
             {alerts && <Alert/>}
