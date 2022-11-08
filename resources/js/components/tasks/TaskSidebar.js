@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setSelectedTask} from "../../features/tasks/taskSlice";
 
-function TaskSidebar(props) {
+function TaskSidebar() {
   const {selectedTask} = useSelector(state => state.task);
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -11,7 +11,7 @@ function TaskSidebar(props) {
   return (
       <>
         {selectedTask &&
-            <div className="sidebar">
+            <div className="sidebar sidebar-visible">
               <div className="row">
                 <div className="col-10">
                   <h6>Update {selectedTask.title}</h6>
@@ -25,17 +25,17 @@ function TaskSidebar(props) {
                   <form>
                     <div className="form-group">
                       <label htmlFor="title">Title</label>
-                      <input className="form-control" name="title" value={selectedTask.title}/>
+                      {/*<input className="form-control" name="title" value={selectedTask.title}/>*/}
                     </div>
                     <div className="form-group">
                       <label htmlFor="subtitle">Subtitle</label>
-                      <input className="form-control" name="subtitle" value={selectedTask.subtitle}/>
+                      {/*<input className="form-control" name="subtitle" value={selectedTask.subtitle}/>*/}
                     </div>
                     <div className="form-group">
                       <label htmlFor="notes">Notes</label>
-                      <textarea className="form-control" name="notes">
-                        {selectedTask.notes}
-                      </textarea>
+                      {/*<textarea className="form-control" name="notes">*/}
+                      {/*  {selectedTask.notes}*/}
+                      {/*</textarea>*/}
                     </div>
                     <button className="btn btn-success">Update</button>
                   </form>

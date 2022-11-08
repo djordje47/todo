@@ -9,9 +9,19 @@
 
 @import "./components/taskSidebar";
 
-body, html, #app {
+body, html {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
+}
+
+.main {
+  display: flex;
+  flex-flow: row wrap;
+  flex-basis: 100%;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
 }
 
 .single-task:hover {
