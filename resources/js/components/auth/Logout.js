@@ -24,7 +24,7 @@ function Logout(props) {
     });
   }
   return (
-      <Link to={'/logout'} onClick={event => handleClick(event)}>Logout</Link>
+      <Link to={'/logout'} onClick={event => handleClick(event)} className="nav-link">Logout</Link>
   )
 }
 
