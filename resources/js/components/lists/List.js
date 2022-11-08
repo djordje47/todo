@@ -7,7 +7,7 @@ import TaskSidebar from "../tasks/TaskSidebar";
 
 function List(props) {
   const {currentUser} = useSelector((state) => state.user);
-  const {selectedTask} = useSelector(state => state.task);
+  const {isSidebarToggled} = useSelector(state => state.task);
   const dispatch = useDispatch();
   useEffect(() => {
     if (currentUser) {
@@ -21,7 +21,7 @@ function List(props) {
   }, []);
   return (
       <div className="container-fluid main">
-        <div className={`ant ${selectedTask ? 'sidebar-active' : ''}`}>
+        <div className={`ant ${isSidebarToggled ? 'sidebar-active' : ''}`}>
           <div className="row m-4">
             <SingleList currentUser={currentUser}/>
             <SingleTaskList currentUser={currentUser}/>

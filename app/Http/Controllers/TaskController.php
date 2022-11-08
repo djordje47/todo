@@ -80,12 +80,13 @@ class TaskController extends Controller
         'files' => 'nullable',
       ]);
 
-      $task = Task::where('id', $request->get('taskId'))->first();
+      $task = Task::where('id', $request->get('id'))->first();
       $task->title = $request->get('title');
       $task->subtitle = $request->get('subtitle');
       $task->notes = $request->get('notes');
+      $task->save();
       $taskList = $this->listTasks($task->list_id);
-      return response(['updatedTask' => $task, 'updatedTaskList' => $taskList], 200);
+      return response(['updatedTask' => $task, 'message' => 'Task updated successfully!'], 200);
     } catch (\Illuminate\Validation\ValidationException $validationException) {
       $validationErrors = Arr::flatten($validationException->errors());
       return response($validationErrors, 403);
