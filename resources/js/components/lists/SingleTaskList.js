@@ -68,7 +68,7 @@ function SingleTaskList({currentUser}) {
                       <div className="actions">
                         <i className={singleTask.is_favorite ? 'bi bi-star-fill text-warning delete-list-btn' : 'bi bi-star delete-list-btn'}
                            onClick={() => handleToggleFavorite(singleTask.id)}></i>
-                        <i className="bi bi-x-lg delete-list-btn ms-2"
+                        <i className="bi bi-x-lg text-danger delete-list-btn ms-2"
                            onClick={() => handleDeleteTask(singleTask.id)}></i>
                       </div>
                     </li>

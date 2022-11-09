@@ -30,11 +30,7 @@ body, html {
   justify-content: space-between;
   align-items: center;
 
-  p {
-    margin-bottom: 0;
-  }
-
-  p:hover {
+  label:hover {
     cursor: pointer;
     color: #2d3748;
     text-decoration: underline;

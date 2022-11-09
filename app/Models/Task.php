@@ -13,6 +13,7 @@ class Task extends Model
     'title',
     'subtitle',
     'notes',
+    'steps',
     'files',
     'is_favorite',
     'is_completed',
@@ -24,5 +25,6 @@ class Task extends Model
   protected $casts = [
     'is_favorite' => 'boolean',
     'is_completed' => 'boolean',
+    'steps' => 'array'
   ];
 }

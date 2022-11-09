@@ -18,7 +18,7 @@ function TaskSidebar() {
                   <h6>Update {selectedTask.title}</h6>
                 </div>
                 <div className="col-2">
-                  <span onClick={handleClick}>x</span>
+                  <i className="bi bi-x-lg delete-list-btn" onClick={handleClick}></i>
                 </div>
               </div>
               <div className="row">
