@@ -1,29 +1,14 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setTaskNotes, setTaskSubtitle, setTaskTitle, toggleSidebar, updateTask} from "../../features/tasks/taskSlice";
+import {toggleSidebar, updateTask} from "../../features/tasks/taskSlice";
 import {setAlert} from "../../features/layouts/alertSlice";
+import UpdateTaskForm from "./UpdateTaskForm";
 
 function TaskSidebar() {
   const {selectedTask, isSidebarToggled} = useSelector(state => state.task);
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(toggleSidebar(false))
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post('/api/list-tasks/update', {
-      id: selectedTask.id,
-      title: selectedTask.title,
-      subtitle: selectedTask.subtitle,
-      notes: selectedTask.notes
-    }).then(res => {
-      console.log(res)
-      const {updatedTask, message} = res.data;
-      dispatch(updateTask(updatedTask));
-      dispatch(setAlert({message, type: 'success'}));
-    }).catch(err => {
-      console.log(err)
-    });
   }
   return (
       <>
@@ -39,25 +24,7 @@ function TaskSidebar() {
               </div>
               <div className="row">
                 <div className="col-12">
-                  <form className="d-grid" onSubmit={(e) => handleSubmit(e)}>
-                    <div className="form-group my-2">
-                      <label htmlFor="title">Title</label>
-                      <input className="form-control" name="title" value={selectedTask.title ?? ''}
-                             onChange={(e) => dispatch(setTaskTitle(e.target.value))}/>
-                    </div>
-                    <div className="form-group my-2">
-                      <label htmlFor="subtitle">Subtitle</label>
-                      <input className="form-control" name="subtitle" value={selectedTask.subtitle ?? ''}
-                             onChange={(e) => dispatch(setTaskSubtitle(e.target.value))}/>
-                    </div>
-                    <div className="form-group my-2">
-                      <label htmlFor="notes">Notes</label>
-                      <textarea className="form-control" value={selectedTask.notes ?? ''} rows={10}
-                                name="notes"
-                                onChange={(e) => dispatch(setTaskNotes(e.target.value))}/>
-                    </div>
-                    <button className="btn btn-success">Update</button>
-                  </form>
+                  <UpdateTaskForm/>
                 </div>
               </div>
             </div>}
