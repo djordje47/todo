@@ -18,6 +18,10 @@ class CreateTasksTable extends Migration
       $table->string('title');
       $table->string('subtitle')->nullable();
       $table->text('notes')->nullable();
+      $table->json('steps')->nullable();
+      $table->dateTime('due_date')->nullable();
+      $table->boolean('is_favorite')->default(false);
+      $table->boolean('is_completed')->default(false);
       $table->json('files')->nullable();
       $table->foreignId('user_id')->references('id')->on('users');
       $table->foreignId('list_id')->references('id')->on('lists');
