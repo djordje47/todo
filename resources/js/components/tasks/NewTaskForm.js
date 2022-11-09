@@ -9,15 +9,16 @@ function NewTaskForm(props) {
   const [title, setTitle] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('/api/create-task', {
+    axios.post('/api/task', {
       title,
       subtitle: '',
       notes: '',
       listId: activeTaskList.id
     }).then(res => {
-      const {data} = res;
+      const {tasks, message} = res.data;
       setTitle('');
-      dispatch(setTasks(data));
+      dispatch(setTasks(tasks));
+      dispatch(setAlert({message, type: 'success'}));
     }).catch(err => {
       console.log(err)
       if (err.response.hasOwnProperty('data')) {
@@ -28,12 +29,13 @@ function NewTaskForm(props) {
     })
   }
   return (
-      <div className="row">
+      <div className="row my-3">
         <div className="col-12">
           <form onSubmit={event => handleSubmit(event)}>
-            <div className="form-group">
+            <div className="input-group">
               <input className="form-control" placeholder="Create new task.." name="title" value={title}
                      onChange={(e) => setTitle(e.target.value)}/>
+              <button className="btn btn-sm btn-success">Create</button>
             </div>
           </form>
         </div>

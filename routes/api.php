@@ -21,13 +21,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/user', function (Request $request) {
     return $request->user();
   });
-  Route::get('/lists/{userId}', [\App\Http\Controllers\TaskListController::class, 'index']);
-  Route::get('/list/{listId}', [\App\Http\Controllers\TaskListController::class, 'show']);
-  Route::post('/list/create', [\App\Http\Controllers\TaskListController::class, 'store']);
-  Route::put('/list/update/{listId}', [\App\Http\Controllers\TaskListController::class, 'update']);
-  Route::get('/list-tasks/{listId}', [\App\Http\Controllers\TaskController::class, 'listTasks']);
-
-  Route::post('/create-task', [\App\Http\Controllers\TaskController::class, 'store']);
-  Route::post('/list-tasks/update', [\App\Http\Controllers\TaskController::class, 'update']);
+  Route::apiResource('task-list', '\App\Http\Controllers\TaskListController');
+  Route::apiResource('task', '\App\Http\Controllers\TaskController');
   Route::post('/logout', [LoginController::class, 'logout']);
 });

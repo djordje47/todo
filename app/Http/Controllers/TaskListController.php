@@ -9,12 +9,11 @@ use Illuminate\Validation\ValidationException;
 class TaskListController extends Controller
 {
   /**
-   * @param int $userId
    * @return \Illuminate\Http\Response
    */
-  public function index(int $userId): \Illuminate\Http\Response
+  public function index(Request $request): \Illuminate\Http\Response
   {
-    $lists = TaskList::where('user_id', $userId)->orderBy('id', 'desc')->get();
+    $lists = TaskList::where('user_id', $request->user()->id)->orderBy('id', 'desc')->get();
     return response(['userLists' => $lists], 200);
   }
 
@@ -88,8 +87,19 @@ class TaskListController extends Controller
    * @param \App\Models\TaskList $taskList
    * @return \Illuminate\Http\Response
    */
-  public function destroy(TaskList $taskList)
+  public function destroy(int $taskListId)
   {
-    //
+    try {
+      $taskList = TaskList::find($taskListId);
+      if ($taskList->tasks()->count() === 0) {
+        $taskList->delete();
+        return response(['message' => 'List deleted successfully!'], 200);
+      }
+      $taskList->tasks()->delete();
+      $taskList->delete();
+      return response(['message' => 'List deleted successfully!'], 200);
+    } catch (\Exception $exception) {
+      return response(['message' => $exception->getMessage()], 500);
+    }
   }
 }

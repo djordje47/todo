@@ -19,7 +19,7 @@ export const taskSlice = createSlice({
       state.tasks = payload;
     },
     removeTask: (state, {payload}) => {
-      state.tasks = state.tasks.filter((alert, index) => (index !== payload))
+      state.tasks.data = state.tasks.data.filter((task, index) => (task.id !== payload))
     },
     updateTask: (state, {payload}) => {
       const index = state.tasks.data.findIndex(task => task.id === payload.id); //finding index of the item

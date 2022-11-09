@@ -6,7 +6,7 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
+@import "~bootstrap-icons/font/bootstrap-icons";
 @import "./components/taskSidebar";
 
 body, html {
@@ -24,6 +24,27 @@ body, html {
   align-items: center;
 }
 
-.single-task:hover {
+.single-task {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  p:hover {
+    cursor: pointer;
+    color: #2d3748;
+    text-decoration: underline;
+  }
+}
+
+.delete-list-btn:before {
+  font-size: 20px;
+}
+
+.delete-list-btn:hover {
   cursor: pointer;
 }

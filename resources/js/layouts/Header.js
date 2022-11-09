@@ -5,6 +5,7 @@ import Logout from "../components/auth/Logout";
 
 function Header(props) {
   const {currentUser} = useSelector((state) => state.user);
+  const {isSidebarToggled} = useSelector((state) => state.task);
   return (
       <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div className="container-fluid">
@@ -18,7 +19,7 @@ function Header(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarText">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className={isSidebarToggled ? 'navbar-nav ms-auto mb-2 mb-lg-0 sidebar-active' : 'navbar-nav ms-auto mb-2 mb-lg-0'}>
               <li className="nav-item">
                 <Link to="/" className="nav-link">Home</Link>
               </li>

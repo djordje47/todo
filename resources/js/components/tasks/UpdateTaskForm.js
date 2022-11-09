@@ -8,7 +8,7 @@ function UpdateTaskForm(props) {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/list-tasks/update', {
+    axios.patch(`/api/task/${selectedTask.id}`, {
       id: selectedTask.id,
       title: selectedTask.title,
       subtitle: selectedTask.subtitle,

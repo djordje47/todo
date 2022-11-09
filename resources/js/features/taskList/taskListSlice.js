@@ -17,9 +17,12 @@ export const taskListSlice = createSlice({
     },
     createTaskList: (state, {payload}) => {
       state.taskLists = payload;
+    },
+    deleteTaskList: (state, {payload}) => {
+      state.taskLists = state.taskLists.filter((list, index) => list.id !== payload);
     }
   }
 });
 
-export const {setTaskLists, setActiveTaskList, createTaskList} = taskListSlice.actions;
+export const {setTaskLists, setActiveTaskList, createTaskList, deleteTaskList} = taskListSlice.actions;
 export default taskListSlice.reducer;

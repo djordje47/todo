@@ -8,7 +8,7 @@ function AppPagination() {
   const {tasks} = useSelector((state) => state.task);
   const dispatch = useDispatch();
   const handlePageClick = (page) => {
-    axios.get(`/api/list-tasks/${activeTaskList.id}?page=${page}`)
+    axios.get(`/api/task/${activeTaskList.id}?page=${page}`)
     .then(response => {
       dispatch(setTasks(response.data));
     }).catch(err => console.log(err));

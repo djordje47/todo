@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\TaskList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -13,9 +14,14 @@ class TaskController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    //
+    $tasks = Task::where([
+      'list_id' => $request->get('listId'),
+      'user_id' => $request->user()->id
+    ])->paginate(10);
+
+    return response()->json($tasks);
   }
 
   /**
@@ -26,8 +32,9 @@ class TaskController extends Controller
    */
   public function store(Request $request)
   {
-    $currentUserId = auth()->user()->id;
+    $currentUserId = $request->user()->id;
     $listId = $request->get('listId');
+    $list = TaskList::find($listId);
     try {
       $request->validate([
         'title' => 'required|string',
@@ -43,7 +50,10 @@ class TaskController extends Controller
         'user_id' => $currentUserId,
         'list_id' => $listId,
       ]);
-      return $this->listTasks($listId);
+      return response([
+        'tasks' => $list->tasks()->where('user_id', $currentUserId)->paginate(10),
+        'message' => "Task $newTask->title created successfully!"
+      ], 200);
     } catch (\Illuminate\Validation\ValidationException $validationException) {
       $validationErrors = Arr::flatten($validationException->errors());
       return response($validationErrors, 403);
@@ -70,7 +80,7 @@ class TaskController extends Controller
    * @param \App\Models\Task $task
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request)
+  public function update(Request $request, int $taskId)
   {
     try {
       $request->validate([
@@ -80,12 +90,11 @@ class TaskController extends Controller
         'files' => 'nullable',
       ]);
 
-      $task = Task::where('id', $request->get('id'))->first();
+      $task = Task::where('id', $taskId)->first();
       $task->title = $request->get('title');
       $task->subtitle = $request->get('subtitle');
       $task->notes = $request->get('notes');
       $task->save();
-      $taskList = $this->listTasks($task->list_id);
       return response(['updatedTask' => $task, 'message' => 'Task updated successfully!'], 200);
     } catch (\Illuminate\Validation\ValidationException $validationException) {
       $validationErrors = Arr::flatten($validationException->errors());
@@ -102,19 +111,16 @@ class TaskController extends Controller
    * @param \App\Models\Task $task
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Task $task)
+  public function destroy(int $taskId)
   {
-    //
-  }
-
-  public function listTasks(int $listId): \Illuminate\Http\JsonResponse
-  {
-    $userId = auth()->user()->id;
-    $tasks = Task::where([
-      'list_id' => $listId,
-      'user_id' => $userId
-    ])->paginate(10);
-
-    return response()->json($tasks);
+    try {
+      $task = Task::find($taskId);
+      $task->delete();
+      $list = TaskList::find($task->list_id);
+      $tasks = $list->tasks()->where('user_id', auth()->user()->id)->paginate(10);
+      return response(['tasks' => $tasks, 'message' => "Task $task->title, deleted successfully!", 'type' => 'success'], 200);
+    } catch (\Exception $exception) {
+      return response(['message' => $exception->getMessage(), 'type' => 'danger'], 500);
+    }
   }
 }

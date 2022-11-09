@@ -11,7 +11,7 @@ function List(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (currentUser) {
-      axios.get(`/api/lists/${currentUser.id}`).then(res => {
+      axios.get('/api/task-list').then(res => {
         const {userLists} = res.data;
         dispatch(setTaskLists(userLists));
       }).catch(err => console.log(err));

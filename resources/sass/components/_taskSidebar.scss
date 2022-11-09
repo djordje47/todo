@@ -20,6 +20,11 @@
   width: calc(100% - 20rem);
 }
 
+.navbar-nav.sidebar-active {
+  transition: .5s margin-right ease-in-out;
+  margin-right: 20rem;
+}
+
 .sidebar-visible {
   right: 0;
   transition: .9s width ease-in-out;
