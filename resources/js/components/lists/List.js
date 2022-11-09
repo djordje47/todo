@@ -12,10 +12,8 @@ function List(props) {
   useEffect(() => {
     if (currentUser) {
       axios.get(`/api/lists/${currentUser.id}`).then(res => {
-        if (res.data.data.length > 0) {
-          // dispatch(setActiveTaskList(res.data.data[0]));
-          dispatch(setTaskLists(res.data));
-        }
+        const {userLists} = res.data;
+        dispatch(setTaskLists(userLists));
       }).catch(err => console.log(err));
     }
   }, []);

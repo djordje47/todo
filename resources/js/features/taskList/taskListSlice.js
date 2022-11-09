@@ -15,11 +15,11 @@ export const taskListSlice = createSlice({
     setActiveTaskList: (state, {payload}) => {
       state.activeTaskList = payload;
     },
-    setTaskListOffset: (state, {payload}) => {
-      state.listOffset = payload;
+    createTaskList: (state, {payload}) => {
+      state.taskLists = payload;
     }
   }
 });
 
-export const {setTaskLists, setActiveTaskList, setTaskListOffset} = taskListSlice.actions;
+export const {setTaskLists, setActiveTaskList, createTaskList} = taskListSlice.actions;
 export default taskListSlice.reducer;

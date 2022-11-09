@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\TaskList;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class TaskListController extends Controller
 {
   /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\JsonResponse
+   * @param int $userId
+   * @return \Illuminate\Http\Response
    */
-  public function index($userId)
+  public function index(int $userId): \Illuminate\Http\Response
   {
-    $lists = TaskList::where('user_id', $userId)->paginate(10);
-    return response()->json($lists);
+    $lists = TaskList::where('user_id', $userId)->orderBy('id', 'desc')->get();
+    return response(['userLists' => $lists], 200);
   }
 
   /**
@@ -24,9 +24,30 @@ class TaskListController extends Controller
    * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(Request $request): \Illuminate\Http\Response
   {
-    //
+    try {
+      $request->validate([
+        'listName' => 'string',
+      ]);
+      $userId = $request->user()->id;
+      $newList = TaskList::create([
+        'name' => $request->get('listName'),
+        'user_id' => $request->user()->id,
+        'subtitle' => null,
+        'description' => null,
+        'thumbnail' => null,
+      ]);
+      $userLists = TaskList::where('user_id', $userId)->orderBy('id', 'desc')->get();
+      return response([
+        'taskLists' => $userLists,
+        'message' => "New list $newList->name created successfully!"
+      ], 200);
+    } catch (ValidationException $validationException) {
+      response($validationException->errors(), 400);
+    } catch (\Exception $exception) {
+      response($exception->getMessage(), 500);
+    }
   }
 
   /**
