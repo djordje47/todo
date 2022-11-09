@@ -1,7 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {toggleSidebar, updateTask} from "../../features/tasks/taskSlice";
-import {setAlert} from "../../features/layouts/alertSlice";
 import UpdateTaskForm from "./UpdateTaskForm";
 
 function TaskSidebar() {
