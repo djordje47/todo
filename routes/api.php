@@ -23,5 +23,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   });
   Route::apiResource('task-list', '\App\Http\Controllers\TaskListController');
   Route::apiResource('task', '\App\Http\Controllers\TaskController');
+  Route::put('/task/toggle-favorite/{task_id}', [\App\Http\Controllers\TaskController::class, 'toggleFavorite']);
+  Route::put('/task/toggle-completed/{task_id}', [\App\Http\Controllers\TaskController::class, 'toggleCompleted']);
   Route::post('/logout', [LoginController::class, 'logout']);
 });

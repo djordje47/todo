@@ -12,9 +12,10 @@ class TaskController extends Controller
   /**
    * Display a listing of the resource.
    *
-   * @return \Illuminate\Http\Response
+   * @param \Illuminate\Http\Request $request
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function index(Request $request)
+  public function index(Request $request): \Illuminate\Http\JsonResponse
   {
     $tasks = Task::where([
       'list_id' => $request->get('listId'),
@@ -28,9 +29,9 @@ class TaskController extends Controller
    * Store a newly created resource in storage.
    *
    * @param \Illuminate\Http\Request $request
-   * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+   * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(Request $request): \Illuminate\Http\Response
   {
     $currentUserId = $request->user()->id;
     $listId = $request->get('listId');
@@ -80,7 +81,7 @@ class TaskController extends Controller
    * @param \App\Models\Task $task
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, int $taskId)
+  public function update(Request $request, int $taskId): \Illuminate\Http\Response
   {
     try {
       $request->validate([
@@ -111,7 +112,7 @@ class TaskController extends Controller
    * @param \App\Models\Task $task
    * @return \Illuminate\Http\Response
    */
-  public function destroy(int $taskId)
+  public function destroy(int $taskId): \Illuminate\Http\Response
   {
     try {
       $task = Task::find($taskId);
@@ -121,6 +122,38 @@ class TaskController extends Controller
       return response(['tasks' => $tasks, 'message' => "Task $task->title, deleted successfully!", 'type' => 'success'], 200);
     } catch (\Exception $exception) {
       return response(['message' => $exception->getMessage(), 'type' => 'danger'], 500);
+    }
+  }
+
+  /**
+   * @param int $taskId
+   * @return \Illuminate\Http\Response
+   */
+  public function toggleFavorite(int $taskId): \Illuminate\Http\Response
+  {
+    try {
+      $task = Task::find($taskId);
+      $task->is_favorite = !$task->is_favorite;
+      $task->update();
+      return response(['task_id' => $task->id]);
+    } catch (\Exception $exception) {
+      return response(['message' => $exception->getMessage(), 'type' => 'danger']);
+    }
+  }
+
+  /**
+   * @param int $taskId
+   * @return \Illuminate\Http\Response
+   */
+  public function toggleCompleted(int $taskId): \Illuminate\Http\Response
+  {
+    try {
+      $task = Task::find($taskId);
+      $task->is_completed = !$task->is_completed;
+      $task->update();
+      return response(['task_id' => $task->id]);
+    } catch (\Exception $exception) {
+      return response(['message' => $exception->getMessage(), 'type' => 'danger']);
     }
   }
 }
