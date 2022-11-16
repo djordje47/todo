@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {toggleSidebar} from "../../features/tasks/taskSlice";
 import UpdateTaskForm from "./UpdateTaskForm";
+import Steps from "../steps/Steps";
 
 function TaskSidebar() {
   const {selectedTask, isSidebarToggled} = useSelector(state => state.task);
@@ -20,6 +21,9 @@ function TaskSidebar() {
                 <div className="col-2">
                   <i className="bi bi-x-lg delete-list-btn" onClick={handleClick}></i>
                 </div>
+              </div>
+              <div className="row">
+                <Steps/>
               </div>
               <div className="row">
                 <div className="col-12">

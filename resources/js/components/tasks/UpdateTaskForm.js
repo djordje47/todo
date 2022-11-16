@@ -48,27 +48,6 @@ function UpdateTaskForm(props) {
                     name="notes"
                     onChange={(e) => dispatch(setTaskNotes(e.target.value))}/>
         </div>
-        <div className="form-group my-2">
-          <label htmlFor="steps">Steps</label>
-          {selectedTask.steps ?
-              <>
-                <ul className="list-group">
-                  {selectedTask.steps.map((step, index) =>
-                      <li className="list-group-item" key={index}>
-                        <input type="checkbox" name="step-completed" checked={step.completed ? "checked" : ''}
-                               className="form-check-input me-1"/>
-                        <label className="form-check-label" htmlFor="step-completed">
-                          {step.step}
-                        </label>
-                      </li>
-                  )}
-                </ul>
-              </> : ''}
-          <div className="input-group my-3">
-            <input type="text" className="form-control" name="steps" placeholder="New step.."/>
-            <button className="btn btn-outline-success btn-sm">Create</button>
-          </div>
-        </div>
         <button className="btn btn-success">Update Task</button>
       </form>
   );

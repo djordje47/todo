@@ -20,7 +20,7 @@ class TaskController extends Controller
     $tasks = Task::where([
       'list_id' => $request->get('listId'),
       'user_id' => $request->user()->id
-    ])->paginate(10);
+    ])->with('steps')->paginate(10);
 
     return response()->json($tasks);
   }

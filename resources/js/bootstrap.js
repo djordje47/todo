@@ -19,17 +19,16 @@ window.axios.interceptors.response.use(
       return response;
     },
     function (error) {
-      debugger;
       switch (error.response.status) {
         case 401: // Not logged in
         case 419: // Session expired
         case 503: // Down for maintenance
-          // Bounce the user to the login screen with a redirect back
+                  // Bounce the user to the login screen with a redirect back
           localStorage.clear();
           window.location.reload();
           break;
         case 500:
-          alert('Oops, something went wrong! The team have been notified.');
+          console.log('Oops, something went wrong!', error);
           break;
         default:
           // Allow individual requests to handle other errors

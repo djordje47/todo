@@ -7,7 +7,8 @@ const initialState = {
     id: null,
     title: '',
     subtitle: '',
-    notes: ''
+    notes: '',
+    steps: []
   },
 }
 
@@ -51,6 +52,15 @@ export const taskSlice = createSlice({
     setTaskNotes: (state, {payload}) => {
       state.selectedTask.notes = payload === null ? '' : payload;
     },
+    setTaskSteps: (state, {payload}) => {
+      state.selectedTask.steps = payload;
+    },
+    addTaskStep: (state, {payload}) => {
+      state.selectedTask.steps = [...state.selectedTask.steps, payload]
+    },
+    deleteTaskStep: (state, {payload}) => {
+      state.selectedTask.steps = state.selectedTask.steps.filter((singleStep, index) => singleStep.id !== payload);
+    },
     toggleSidebar: (state, {payload}) => {
       state.isSidebarToggled = payload;
     }
@@ -66,6 +76,9 @@ export const {
   setTaskNotes,
   setTaskSubtitle,
   toggleSidebar,
+  setTaskSteps,
+  addTaskStep,
+  deleteTaskStep,
   toggleFavorite,
   toggleCompleted
 } = taskSlice.actions;
