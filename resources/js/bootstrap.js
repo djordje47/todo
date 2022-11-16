@@ -13,6 +13,29 @@ try {
 
 window.axios = require('axios');
 axios.defaults.withCredentials = true;
+window.axios.interceptors.response.use(
+    function (response) {
+      // Call was successful, don't do anything special.
+      return response;
+    },
+    function (error) {
+      debugger;
+      switch (error.response.status) {
+        case 401: // Not logged in
+        case 419: // Session expired
+        case 503: // Down for maintenance
+          // Bounce the user to the login screen with a redirect back
+          localStorage.clear();
+          window.location.reload();
+          break;
+        case 500:
+          alert('Oops, something went wrong! The team have been notified.');
+          break;
+        default:
+          // Allow individual requests to handle other errors
+          return Promise.reject(error);
+      }
+    });
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
