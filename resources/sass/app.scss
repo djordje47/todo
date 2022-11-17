@@ -44,3 +44,7 @@ body, html {
 .delete-list-btn:hover {
   cursor: pointer;
 }
+
+.react-datetime-picker__calendar, .react-datetime-picker__clock {
+  z-index: 99999999999 !important;
+}

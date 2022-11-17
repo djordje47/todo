@@ -26,6 +26,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "bootstrap-icons": "^1.9.1",
+    "react-datetime-picker": "^4.1.1",
     "react-js-pagination": "^3.0.3",
     "react-redux": "^8.0.4",
     "react-router": "^6.4.3",

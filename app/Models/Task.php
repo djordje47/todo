@@ -28,6 +28,8 @@ class Task extends Model
     'is_completed' => 'boolean',
   ];
 
+  protected $dates = ['due_date'];
+
   public function taskList(): BelongsTo
   {
     return $this->belongsTo(TaskList::class);

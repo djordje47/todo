@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\TaskList;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -88,6 +89,7 @@ class TaskController extends Controller
         'title' => 'required|string',
         'subtitle' => 'nullable|string',
         'notes' => 'nullable|string',
+        'due_date' => 'nullable|string',
         'files' => 'nullable',
       ]);
 
@@ -95,6 +97,7 @@ class TaskController extends Controller
       $task->title = $request->get('title');
       $task->subtitle = $request->get('subtitle');
       $task->notes = $request->get('notes');
+      $task->due_date = Carbon::parse($request->get('due_date'));
       $task->save();
       return response(['updatedTask' => $task, 'message' => 'Task updated successfully!'], 200);
     } catch (\Illuminate\Validation\ValidationException $validationException) {
