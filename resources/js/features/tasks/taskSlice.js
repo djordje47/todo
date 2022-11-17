@@ -61,6 +61,15 @@ export const taskSlice = createSlice({
     deleteTaskStep: (state, {payload}) => {
       state.selectedTask.steps = state.selectedTask.steps.filter((singleStep, index) => singleStep.id !== payload);
     },
+    setStepCompleted: (state, {payload}) => {
+      state.selectedTask.steps = state.selectedTask.steps.map((singleStep, index) => {
+        if (singleStep.id === payload.id) {
+          singleStep.is_completed = payload.is_completed;
+          return singleStep;
+        }
+        return singleStep;
+      });
+    },
     toggleSidebar: (state, {payload}) => {
       state.isSidebarToggled = payload;
     }
@@ -79,6 +88,7 @@ export const {
   setTaskSteps,
   addTaskStep,
   deleteTaskStep,
+  setStepCompleted,
   toggleFavorite,
   toggleCompleted
 } = taskSlice.actions;

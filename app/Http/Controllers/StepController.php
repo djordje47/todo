@@ -66,9 +66,9 @@ class StepController extends Controller
     ]);
     $step = Step::find($stepId);
     $step->name = $request->get('name');
-    $step->is_completed = $request->get('isCompleted');
+    $step->is_completed = !$step->is_completed;
     $step->update();
-    return response(['message' => "Step $step->name updated successfully!"], 200);
+    return response(['updatedStep' => $step, 'message' => "Step $step->name updated successfully!"], 200);
   }
 
   /**
