@@ -43,9 +43,9 @@ class TaskListController extends Controller
         'message' => "New list $newList->name created successfully!"
       ], 200);
     } catch (ValidationException $validationException) {
-      response($validationException->errors(), 400);
+      return response($validationException->errors(), 400);
     } catch (\Exception $exception) {
-      response($exception->getMessage(), 500);
+      return response($exception->getMessage(), 500);
     }
   }
 
@@ -64,7 +64,7 @@ class TaskListController extends Controller
       'id' => $listId
     ])->first();
     if ($list->tasks->count()) {
-      $tasks = $list->tasks()->where('user_id', $userId)->paginate(10);
+      $tasks = $list->tasks()->with('steps')->where('user_id', $userId)->paginate(10);
     }
     return response(['activeList' => $list, 'tasks' => $tasks], 200);
   }

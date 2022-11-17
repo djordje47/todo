@@ -62,13 +62,11 @@ export const taskSlice = createSlice({
       state.selectedTask.steps = state.selectedTask.steps.filter((singleStep, index) => singleStep.id !== payload);
     },
     setStepCompleted: (state, {payload}) => {
-      state.selectedTask.steps = state.selectedTask.steps.map((singleStep, index) => {
-        if (singleStep.id === payload.id) {
-          singleStep.is_completed = payload.is_completed;
-          return singleStep;
-        }
-        return singleStep;
-      });
+      const {id} = payload;
+      const index = state.selectedTask.steps.findIndex(step => step.id === id); //finding index of the item
+      const newArray = [...state.selectedTask.steps]; //making a new array
+      newArray[index].is_completed = !newArray[index].is_completed; //changing value in the new array
+      state.selectedTask.steps = newArray;
     },
     toggleSidebar: (state, {payload}) => {
       state.isSidebarToggled = payload;
