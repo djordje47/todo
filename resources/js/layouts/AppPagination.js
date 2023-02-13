@@ -16,9 +16,9 @@ function AppPagination() {
   return (
       <div>
         {tasks.data && <Pagination
-            activePage={tasks.current_page}
+            activePage={tasks.currentPage}
             totalItemsCount={tasks.total}
-            itemsCountPerPage={tasks.per_page}
+            itemsCountPerPage={tasks.perPage}
             innerClass={'pagination justify-content-center align-items-center m-4'}
             itemClass={'page-item'}
             linkClass={'page-link'}

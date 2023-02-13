@@ -42,6 +42,7 @@ function SingleTaskList({currentUser}) {
       console.log(err)
     });
   }
+
   return (
       <div className="col-9 border-1">
         <div className="row">
@@ -56,7 +57,8 @@ function SingleTaskList({currentUser}) {
             <>
               <ul className="list-group">
                 {tasks.data ? tasks.data.map((singleTask, index) => (
-                    <li className="list-group-item single-task" key={singleTask.id}>
+                    <li className={`list-group-item single-task ${singleTask.is_completed ? 'completed-task' : ''}`}
+                        key={singleTask.id}>
                       <div className="task">
                         <input type="checkbox" className="form-check-input me-1"
                                value={singleTask.is_completed}

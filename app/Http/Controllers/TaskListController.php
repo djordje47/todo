@@ -64,7 +64,7 @@ class TaskListController extends Controller
       'id' => $listId
     ])->first();
     if ($list->tasks->count()) {
-      $tasks = $list->tasks()->with('steps')->where('user_id', $userId)->paginate(10);
+      $tasks = $list->tasks()->with('steps')->where('user_id', $userId)->orderBy('is_completed')->paginate(10);
     }
     return response(['activeList' => $list, 'tasks' => $tasks], 200);
   }
