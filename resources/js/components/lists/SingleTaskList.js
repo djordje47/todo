@@ -66,6 +66,8 @@ function SingleTaskList({currentUser}) {
                                onChange={e => handleToggleCompleted(e.target.value, singleTask.id)}/>
                         <label className="form-check-label" onClick={() => handleClick(singleTask)}
                                htmlFor="firstCheckbox">{singleTask.title}</label>
+                        {singleTask.subtitle && <small className="task-subtitle">({singleTask.subtitle})</small>}
+                        {singleTask.due_date && <small className="task-due-date">({singleTask.due_date})</small>}
                       </div>
                       <div className="actions">
                         <i className={singleTask.is_favorite ? 'bi bi-star-fill text-warning delete-list-btn' : 'bi bi-star delete-list-btn'}
