@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import {setTaskDueDate, setTaskNotes, setTaskSubtitle, setTaskTitle, updateTask} from "../../features/tasks/taskSlice";
 import {setAlert} from "../../features/layouts/alertSlice";
 import {useDispatch, useSelector} from "react-redux";
-import DateTimePicker from 'react-datetime-picker';
+import DatePicker, {registerLocale} from "react-datepicker";
+import sr from 'date-fns/locale/sr-Latn';
+import "react-datepicker/dist/react-datepicker.css";
+
+registerLocale('sr', sr)
 
 function UpdateTaskForm(props) {
   const [due_date, setDueDate] = useState(new Date());
@@ -24,7 +28,6 @@ function UpdateTaskForm(props) {
       console.log(err)
     });
   }
-  console.log(new Date())
   return (
       <form className="d-grid" onSubmit={(e) => handleSubmit(e)}>
         <div className="form-group my-2">
@@ -41,9 +44,10 @@ function UpdateTaskForm(props) {
         </div>
         <div className="form-group my-2">
           <label htmlFor="due_date">Due Date</label>
-          <DateTimePicker onChange={(value) => dispatch(setTaskDueDate(value))}
-                          locale="sr"
-                          value={selectedTask.due_date ? new Date(selectedTask.due_date) : new Date()}/>
+          <DatePicker selected={selectedTask.due_date ? new Date(selectedTask.due_date) : new Date()}
+                      locale="sr"
+                      dateFormat="dd/MM/yyyy"
+                      onChange={(date) => dispatch(setTaskDueDate(date))}/>
         </div>
         <div className="form-group my-2">
           <label htmlFor="notes">Notes</label>

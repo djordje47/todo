@@ -35,6 +35,17 @@ body, html {
     color: #2d3748;
     text-decoration: underline;
   }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .actions * {
+    margin: 0 4px;
+  }
 }
 
 .completed-task {

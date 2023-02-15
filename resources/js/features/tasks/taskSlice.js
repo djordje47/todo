@@ -53,7 +53,6 @@ export const taskSlice = createSlice({
       state.selectedTask.notes = payload === null ? '' : payload;
     },
     setTaskDueDate: (state, {payload}) => {
-      console.log(payload)
       state.selectedTask.due_date = payload === null ? '' : payload;
     },
     setTaskSteps: (state, {payload}) => {
