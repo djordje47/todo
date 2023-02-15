@@ -17,14 +17,11 @@ function Steps() {
   }, []);
   const handleClick = (stepId) => {
     axios.delete(`/api/step/${stepId}`).then(({data}) => {
-      console.log(data)
       dispatch(deleteTaskStep(data.deletedStepId));
       dispatch(setAlert({message: data.message}))
     }).catch(err => console.log(err))
   }
   const handleCompleted = (checked, step) => {
-    console.log(checked)
-    console.log(step)
     const {name, id} = step;
     axios.put(`/api/step/${id}`, {
       name,
