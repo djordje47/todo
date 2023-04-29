@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
@@ -42,7 +42,7 @@ function Main() {
             </ProtectedRoute>
           }/>
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
   );
 }

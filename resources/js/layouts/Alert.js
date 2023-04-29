@@ -10,7 +10,7 @@ function Alert() {
     dispatch(removeAlert(index));
   }
   return (
-      <div>
+      <>
         {alerts.map((singleAlert, index) => (
             <div key={index}
                  className={`alert alert-${singleAlert.type ?? 'info'} alert-dismissible fade show m-1`}
@@ -20,7 +20,7 @@ function Alert() {
                       onClick={(e) => handleClick(e, index)}></button>
             </div>
         ))}
-      </div>
+      </>
   );
 }
 

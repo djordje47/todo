@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Footer(props) {
+function Footer() {
   return (
-      <footer>
+      <footer className="bottom-0 position-absolute w-100">
         <div className="container-fluid">
           <div className="row justify-content-center align-content-center align-items-center">
             <div className="col-12">

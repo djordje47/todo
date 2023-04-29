@@ -65,3 +65,15 @@ body, html {
 .react-datetime-picker__calendar, .react-datetime-picker__clock {
   z-index: 99999999999 !important;
 }
+
+#app {
+  height: 100%;
+  //display: flex;
+  //flex-flow: column;
+  //justify-content: space-between;
+  //align-items: center;
+
+  //.navbar {
+  //  width: 100%;
+  //}
+}
