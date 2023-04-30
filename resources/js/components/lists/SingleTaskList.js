@@ -9,7 +9,7 @@ function SingleTaskList({currentUser}) {
   const {activeTaskList} = useSelector((state) => state.taskList);
   const {tasks} = useSelector(state => state.task);
   return (
-      <div className="col-9 border-1">
+      <div className="col-lg-9 col-xs-12 col-sm-12 border-1">
         <div className="row">
           <div className="col-10">
             <h4>{currentUser && `${currentUser.name}'s tasks`}</h4>

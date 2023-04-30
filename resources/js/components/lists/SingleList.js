@@ -41,7 +41,7 @@ function SingleList({currentUser}) {
     })
   }
   return (
-      <div className="col-3 border-1">
+      <div className="col-lg-3 col-sm-12 col-xs-12 border-1">
         <h4>{currentUser && `${currentUser.name}'s lists`}</h4>
         <hr/>
         <ul className="list-group">
