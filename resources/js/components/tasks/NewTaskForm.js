@@ -34,7 +34,7 @@ function NewTaskForm(props) {
           <form onSubmit={event => handleSubmit(event)}>
             <div className="input-group">
               <input className="form-control" placeholder="Create new task.." name="title" value={title}
-                     onChange={(e) => titleChangeHandler(e)}/>
+                     onChange={(e) => setTitle(e.target.value)}/>
               <button className="btn btn-sm btn-success">Create</button>
             </div>
           </form>
