@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
@@ -13,7 +13,6 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import Logout from "./auth/Logout";
 import {PersistGate} from "redux-persist/integration/react";
 import Alert from "../layouts/Alert";
-import TaskSidebar from "./tasks/TaskSidebar";
 
 function Main() {
   const {currentUser} = useSelector(state => state.user);
@@ -23,7 +22,7 @@ function Main() {
         <Header/>
         <div className="row justify-content-center align-content-center align-items-center m-4">
           <div className="col-6">
-            {alerts && <Alert/>}
+            {alerts && <Alert alerts={alerts}/>}
           </div>
         </div>
         <Routes>
@@ -42,7 +41,7 @@ function Main() {
             </ProtectedRoute>
           }/>
         </Routes>
-        <Footer />
+        <Footer/>
       </Router>
   );
 }

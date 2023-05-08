@@ -21,7 +21,7 @@ function Login(props) {
     });
     dispatch(setAuthenticatedUser(user.data));
     if (user) {
-      dispatch(setAlert({title: "Success!", message: 'You are logged in!', type: 'success'}));
+      dispatch(setAlert([{title: "Success!", message: 'You are logged in!', type: 'success'}]));
       navigate("/list");
     }
   }

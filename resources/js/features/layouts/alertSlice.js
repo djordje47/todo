@@ -9,10 +9,10 @@ export const alertSlice = createSlice({
   initialState,
   reducers: {
     setAlert: (state, {payload}) => {
-      state.alerts = [...state.alerts, payload];
+      state.alerts = [...payload];
     },
-    removeAlert: (state, {payload}) => {
-      state.alerts = state.alerts.filter((alert, index) => (index !== payload))
+    removeAlert: (state) => {
+      state.alerts = [];
     }
   }
 });

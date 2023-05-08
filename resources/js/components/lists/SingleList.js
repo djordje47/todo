@@ -25,7 +25,7 @@ function SingleList({currentUser}) {
     }).then(res => {
       const {taskLists, message} = res.data;
       dispatch(createTaskList(taskLists));
-      dispatch(setAlert({message, type: 'success'}))
+      dispatch(setAlert([{message, type: 'success'}]))
       setListName('');
     }).catch(err => {
       console.log(err)
@@ -34,10 +34,10 @@ function SingleList({currentUser}) {
   const handleListDelete = (listId) => {
     axios.delete(`/api/task-list/${listId}`).then(res => {
       dispatch(deleteTaskList(listId));
-      dispatch(setAlert({message: res.data.message}))
+      dispatch(setAlert([{message: res.data.message}]))
     }).catch(err => {
       const message = err.response.data.message;
-      dispatch(setAlert({message, type: 'danger'}))
+      dispatch(setAlert([{message, type: 'danger'}]))
     })
   }
   return (

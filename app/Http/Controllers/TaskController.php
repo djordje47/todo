@@ -119,6 +119,7 @@ class TaskController extends Controller
   {
     try {
       $task = Task::find($taskId);
+      $task->steps()->delete();
       $task->delete();
       $list = TaskList::find($task->list_id);
       $tasks = $list->tasks()->where('user_id', auth()->user()->id)->paginate(10);

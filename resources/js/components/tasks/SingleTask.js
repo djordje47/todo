@@ -19,7 +19,7 @@ const SingleTask = ({singleTask}) => {
     axios.delete(`/api/task/${taskId}`).then(res => {
       const {tasks, message, type} = res.data;
       dispatch(setTasks(tasks));
-      setAlert({message, type});
+      setAlert([{message, type}]);
     }).catch(err => {
       setAlert({message, type})
     })

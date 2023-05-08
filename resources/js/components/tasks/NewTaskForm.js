@@ -18,12 +18,12 @@ function NewTaskForm(props) {
       const {tasks, message} = res.data;
       setTitle('');
       dispatch(setTasks(tasks));
-      dispatch(setAlert({message, type: 'success'}));
+      dispatch(setAlert([{message, type: 'success'}]));
     }).catch(err => {
       console.log(err)
       if (err.response.hasOwnProperty('data')) {
         err.response.data.forEach(single => {
-          dispatch(setAlert({type: 'danger', message: single}))
+          dispatch(setAlert([{type: 'danger', message: single}]))
         });
       }
     })

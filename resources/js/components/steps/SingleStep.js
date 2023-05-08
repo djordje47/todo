@@ -8,7 +8,7 @@ const SingleStep = ({step}) => {
   const handleDelete = (stepId) => {
     axios.delete(`/api/step/${stepId}`).then(({data}) => {
       dispatch(deleteTaskStep(data.deletedStepId));
-      dispatch(setAlert({message: data.message}))
+      dispatch(setAlert([{message: data.message}]))
     }).catch(err => console.log(err))
   }
   const handleCompleted = (checked, step) => {

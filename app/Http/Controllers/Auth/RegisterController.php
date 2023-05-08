@@ -7,6 +7,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -47,7 +48,7 @@ class RegisterController extends Controller
         return response()->json(['Successful registration! You can login now!']);
       }
     } catch (ValidationException $validationException) {
-      return response()->json([$validationException->errors()]);
+      return response()->json(Arr::flatten($validationException->errors(), 5));
     } catch (Exception $exception) {
       return response()->json([$exception->getMessage()]);
     }

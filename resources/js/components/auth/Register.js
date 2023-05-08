@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
+import {useDispatch} from "react-redux";
+import {setAlert} from "../../features/layouts/alertSlice";
 
 function Register(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +17,7 @@ function Register(props) {
       password_confirmation: confirmedPassword
     }).then(res => {
       console.log(res.data);
+      dispatch(setAlert(res.data));
     }).catch(err => {
       console.log(err);
     })

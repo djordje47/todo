@@ -23,7 +23,7 @@ function UpdateTaskForm(props) {
     }).then(res => {
       const {updatedTask, message} = res.data;
       dispatch(updateTask(updatedTask));
-      dispatch(setAlert({message, type: 'success'}));
+      dispatch(setAlert([{message, type: 'success'}]));
     }).catch(err => {
       console.log(err)
     });
